@@ -1,6 +1,6 @@
 # aws-lambdas-chat
 
-    Chat back-end implemented with aws Lambdas and aws ElastiCache - Redis.
+Chat back-end implemented with aws Lambdas and aws ElastiCache - Redis.
 
 ## Upload lambda to aws
     * copy the common folder to the lambda folder
