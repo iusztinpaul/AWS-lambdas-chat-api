@@ -19,15 +19,17 @@ exports.handler = function(e, ctx, callback) {
             rsmq.createQueue( {qname: cr_queue_namespace}, function (err, resp) {
 
                 if(err) {
-                    callback(err);
+                    callback(err, 'sdfisdfi');
+                    rsmq.quit();
                 }
 
                 if (resp===1 && users.length - 1 == index) {
+                    callback(null, `Queues for chatroom ${cr_namespace} were created successfully`);
                     rsmq.quit(); // After creating the last queue close the redis client.
                 }
             });
         });
 
-        callback(null, `Queues for chatroom ${cr_namespace} were created successfully`);
+        
     }
 }
