@@ -1,0 +1,9 @@
+{
+    "name": "message",
+    "version": "0.0.1",
+    "description": "Messanger send and get functions",
+    "dependencies": {
+        "redis": "^2.8.0",
+        "rsmq": "^0.9.2"
+    }
+}
