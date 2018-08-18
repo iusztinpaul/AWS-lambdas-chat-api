@@ -14,6 +14,10 @@ const TO = 'to'
 const LISTENER = 'listener'
 const USERS = 'users'
 
+//true and false strings
+const TRUE = 'true'
+const FALSE = 'false'
+
 module.exports = {
     REDIS_OPTIONS: REDIS_OPTIONS,
     CHAT_ROOM_NAMESPACE: CHAT_ROOM_NAMESPACE,
@@ -21,5 +25,7 @@ module.exports = {
     FROM: FROM,
     TO: TO,
     LISTENER: LISTENER,
-    USERS: USERS
+    USERS: USERS,
+    TRUE: TRUE,
+    FALSE: FALSE
 }

@@ -4,7 +4,7 @@ Chat back-end implemented with aws Lambdas and aws ElastiCache - Redis.
 
 ## Upload lambda to aws
     * copy the common folder to the lambda folder
-    * run `npm install rsmq` in the desired folder
+    * run `npm install rsmq redis` in the desired folder
     * zip the node_modules, *.json files and the desired lambda function 
     * upload the *.zip to aws lambda functions
 
