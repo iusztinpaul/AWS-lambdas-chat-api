@@ -2,7 +2,7 @@ var settings = require('common/settings')
 var RedisSMQ = require("rsmq");
 var f = require('./common/functions')
 
-exports.handle = function(e, ctx, callback) {
+exports.handler = function(e, ctx, callback) {
 
 	var rsmq = new RedisSMQ(settings.REDIS_OPTIONS);
 	let from = e.from;
@@ -12,7 +12,7 @@ exports.handle = function(e, ctx, callback) {
 
 	if(from === undefined || to === undefined || listener === undefined) {
 		callback(null, f.createResponse('', 
-			'One of the following query strings were not passed: from, to, listener', 
+			'One of the following query strings were not passed: from, to, listener, message', 
 			'', 200));
 			rsmq.quit();
 	} else {
