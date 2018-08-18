@@ -1,35 +1,27 @@
 var RedisSMQ = require("rsmq");
 var settings = require('./common/settings')
-var rsmq = new RedisSMQ(settings.REDIS_OPTIONS)
+var f = require('./common/functions')
 
 exports.handler = function(e, ctx, callback) {
-
+    
+    let rsmq = new RedisSMQ(settings.REDIS_OPTIONS)
     let listener = e.listener;
-    let users = e.users;
+    let user = e.user;
 
-    if(listener == undefined || users == undefined) {
-        callback(new Error("There are no listener or users passed as parameters"));
+    if(listener == undefined || user == undefined) {
+        callback(f.createResponse('',"There are no listener or user passed as parameters", '', 400));
         rsmq.quit();
     } else {
-
-        let cr_namespace = `${settings.CHAT_ROOM_NAMESPACE}-${listener}`;        
-        users.forEach( (user, index) => {
-            let cr_queue_namespace = `${cr_namespace}-${user}`; // Per user chat queue.
-
-            rsmq.createQueue( {qname: cr_queue_namespace}, function (err, resp) {
-
-                if(err) {
-                    callback(err, 'sdfisdfi');
-                    rsmq.quit();
-                }
-
-                if (resp===1 && users.length - 1 == index) {
-                    callback(null, `Queues for chatroom ${cr_namespace} were created successfully`);
-                    rsmq.quit(); // After creating the last queue close the redis client.
-                }
-            });
+        let cr_namespace = `${settings.CHAT_ROOM_NAMESPACE}-${listener}`; 
+        let cr_queue_namespace = `${cr_namespace}-${user}`; // Per user chat queue.
+            
+        rsmq.createQueue( {qname: cr_queue_namespace}, function (err, resp) {
+            if(err) {
+                callback(f.createResponse('', err.message, '', 500));
+            } else {
+                callback(null, f.createResponse('', '', `Queue ${cr_queue_namespace} was created.`, 200));
+            } 
+            rsmq.quit();
         });
-
-        
     }
 }
