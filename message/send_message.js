@@ -1,38 +1,38 @@
 var settings = require('common/settings')
 var RedisSMQ = require("rsmq");
-var rsmq = new RedisSMQ(settings.REDIS_OPTIONS);
+var f = require('./common/functions')
 
-exports.handle = function(e, ctx, cb) {
+exports.handle = function(e, ctx, callback) {
 
-rsmq.createQueue({qname:"myqueue"}, function (err, resp) {
-		if (resp===1) {
-			console.log("queue created")
-		}
-});
+	var rsmq = new RedisSMQ(settings.REDIS_OPTIONS);
+	let from = e.from;
+	let to = e.to;
+	let listener = e.listener;
+	let message = e.message;
 
-rsmq.sendMessage({qname:"myqueue", message:"Hello World"}, function (err, resp) {
-	if (resp) {
-		console.log("Message sent. ID:", resp);
+	if(from === undefined || to === undefined || listener === undefined) {
+		callback(null, f.createResponse('', 
+			'One of the following query strings were not passed: from, to, listener', 
+			'', 200));
+			rsmq.quit();
+	} else {
+		let json_serialzed_message = JSON.stringify({
+			from: from,
+			to: to,
+			message: message
+		});
+		let cr_namespace = `${settings.CHAT_ROOM_NAMESPACE}-${listener}`; 
+        let cr_queue_namespace = `${cr_namespace}-${to}`; // Per user chat queue.
+        console.log(`Message queue namespace: ${cr_queue_namespace}`)
+
+		rsmq.sendMessage({qname: cr_queue_namespace, message:json_serialzed_message}, 
+			function (err, resp) {
+			if (err) {
+				callback(f.createResponse('', err.message, '', 500));
+			} else {
+				callback(null, f.createResponse('', '', `Message ${json_serialzed_message} was queued.`, 200));
+            } 
+            rsmq.quit();
+		});
 	}
-});
-
-rsmq.receiveMessage({qname:"myqueue"}, function (err, resp) {
-	if (resp.id) {
-		console.log("Message received.", resp)	
-	}
-	else {
-		console.log("No messages for me...")
-	}
-});
-
-rsmq.listQueues( function (err, queues) {
-	if( err ){
-		console.error( err )
-		return
-	}
-	console.log("Active queues: " + queues.join( "," ) )
-});
-
-cb(null, { hello: 'world' })
-  
 }
