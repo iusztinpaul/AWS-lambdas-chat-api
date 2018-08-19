@@ -7,13 +7,15 @@ Chat back-end implemented with aws Lambdas and aws ElastiCache - Redis.
     /croom/join -> POST, DELETE (query params: user, listener)
     /croom/message -> POST (params: from, to, listener, message), GET(params: listener, user)
 
-    ## !!! Response has the following format: 
+## !!! Response has the following format !!!: 
+```
     {
         data: data,
         errorMessage: errorMessage,
         infoMessage: infoMessage,
         statusCode: statusCode
     }
+```
 
 ## Upload lambda to aws
     * copy the common folder to the lambda folder
