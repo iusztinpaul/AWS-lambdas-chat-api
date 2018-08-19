@@ -13,10 +13,10 @@ exports.handler = function(e, ctx, callback, flag_value) {
             callback(f.createResponse('', err.message, '', 500));
             redisClient.quit();
         } else {
-            if(listener === undefined || user === undefined) {
+            if(f.isAnyNullOrEmpty(user, listener)) {
                 callback(null, f.createResponse('', 
                     'One of the following query strings were not passed: listener, user', 
-                    '', 200));
+                    '', 400));
                     redisClient.quit();
             } else {
                 let cr_namespace = `${settings.CHAT_ROOM_NAMESPACE}-${listener}`; 

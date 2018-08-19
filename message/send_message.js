@@ -10,10 +10,10 @@ exports.handler = function(e, ctx, callback) {
 	let listener = e.listener;
 	let message = e.message;
 
-	if(from === undefined || to === undefined || listener === undefined) {
+	if(f.isAnyNullOrEmpty(from, to, listener, message)) {
 		callback(null, f.createResponse('', 
 			'One of the following query strings were not passed: from, to, listener, message', 
-			'', 200));
+			'', 400));
 			rsmq.quit();
 	} else {
 		let json_serialzed_message = JSON.stringify({

@@ -8,10 +8,10 @@ exports.handler = function(e, ctx, callback) {
 	let user = e.user;
 	let listener = e.listener;
 
-	if(listener === undefined || user === undefined) {
+	if(f.isAnyNullOrEmpty(listener, user)) {
 		callback(null, f.createResponse('', 
 			'One of the following query strings were not passed: listener, user', 
-			'', 200));
+			'', 400));
 			rsmq.quit();
 	} else {
 		let cr_namespace = `${settings.CHAT_ROOM_NAMESPACE}-${listener}`; 

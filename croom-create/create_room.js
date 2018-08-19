@@ -8,7 +8,7 @@ exports.handler = function(e, ctx, callback) {
     let listener = e.listener;
     let user = e.user;
 
-    if(listener == undefined || user == undefined) {
+    if(f.isAnyNullOrEmpty(listener, user)) {
         callback(f.createResponse('',"There are no listener or user passed as parameters", '', 400));
         rsmq.quit();
     } else {
