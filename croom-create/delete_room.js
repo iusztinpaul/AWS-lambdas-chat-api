@@ -17,7 +17,7 @@ exports.handler = function(e, ctx, callback) {
             
         rsmq.deleteQueue( {qname: cr_queue_namespace}, function (err, resp) {
             if(err) {
-                callback(f.createResponse('', err.message, '', 500));
+                callback(null, f.createResponse('', err.message, '', 500));
             } else {
                 callback(null, f.createResponse('', '', `Queue ${cr_queue_namespace} was deleted.`, 200));
             } 

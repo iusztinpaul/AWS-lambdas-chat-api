@@ -28,7 +28,7 @@ exports.handler = function(e, ctx, callback) {
 		rsmq.sendMessage({qname: cr_queue_namespace, message:json_serialzed_message}, 
 			function (err, resp) {
 			if (err) {
-				callback(f.createResponse('', err.message, '', 500));
+				callback(null, f.createResponse('', err.message, '', 500));
 			} else {
 				callback(null, f.createResponse('', '', `Message ${json_serialzed_message} was queued.`, 200));
             } 

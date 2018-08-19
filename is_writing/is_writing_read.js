@@ -26,7 +26,7 @@ exports.handler = function(e, ctx, callback, flag_value) {
                 
                 redisClient.get(cr_writing_flag_key, function(err, reply) {
                     if (err) {
-                        callback(f.createResponse('', err.message, '', 500));
+                        callback(null, f.createResponse('', err.message, '', 500));
                     } else {
                         if(reply) {
                             if(reply === settings.TRUE)
