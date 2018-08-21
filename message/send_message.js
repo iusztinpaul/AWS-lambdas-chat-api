@@ -12,7 +12,7 @@ exports.handler = function(e, ctx, callback) {
 
 	if(f.isAnyNullOrEmpty(from, to, listener, message)) {
 		callback(null, f.createResponse('', 
-			'One of the following query strings were not passed: from, to, listener, message', 
+			'One of the following query strings were not passed or empty: from, to, listener, message', 
 			'', 400));
 			rsmq.quit();
 	} else {

@@ -9,7 +9,7 @@ exports.handler = function(e, ctx, callback) {
     let user = e.user;
 
     if(f.isAnyNullOrEmpty(listener, user)) {
-        callback(f.createResponse('',"There are no listener or user passed as parameters", '', 400));
+        callback(null, f.createResponse('',"There are no listener or user passed as parameters", '', 400));
         rsmq.quit();
     } else {
         let cr_namespace = `${settings.CHAT_ROOM_NAMESPACE}-${listener}`; 

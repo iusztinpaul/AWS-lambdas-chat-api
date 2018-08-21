@@ -1,6 +1,6 @@
 const REDIS_OPTIONS = {
-    host: "lowkeyapp-chat-redis.hznbrp.0001.euc1.cache.amazonaws.com",
-    port: 6379,
+    host: process.env.REDIS_URL,
+    port: process.env.REDIS_PORT,
     ns: 'cr'
     }
 

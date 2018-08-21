@@ -24,7 +24,7 @@ exports.handler = function(e, ctx, callback) {
 				callback(f.createResponse('', err.message, '', 500));
 			} else {
                 if(resp.id)
-                    callback(null, f.createResponse(resp, '', '', 200));
+                    callback(null, f.createResponse(JSON.parse(resp), '', '', 200));
                 else
                     callback(null, f.createResponse('','','No messages', 200))
             } 

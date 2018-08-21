@@ -8,12 +8,18 @@ var createResponse = function(data='', errorMessage='', infoMessage='', statusCo
 }
 
 var isNullOrEmpty = function(text) {
-    return text === '' || text === null || text === undefined;
+    return text === null || text === undefined || text.length === 0;
 }
 
 var isAnyNullOrEmpty = function(...lines) {
     return lines.some( (line) => {
-        return isNullOrEmpty(line);
+        let result = false;
+        if(Array.isArray(line)) 
+            line.forEach( (elem) => {  
+                result = result || isNullOrEmpty(elem);
+            });
+        
+        return result || isNullOrEmpty(line);
     });
 }
 

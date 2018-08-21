@@ -10,7 +10,7 @@ exports.handler = function(e, ctx, callback, flag_value) {
     
     redisClient.on('connect', function(err) {
         if(err) {
-            callback(f.createResponse('', err.message, '', 500));
+            callback(null, f.createResponse('', err.message, '', 500));
             redisClient.quit();
         } else {
             if(f.isAnyNullOrEmpty(user, listener)) {

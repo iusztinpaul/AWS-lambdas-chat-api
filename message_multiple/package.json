@@ -1,0 +1,8 @@
+{
+    "name": "message",
+    "version": "0.0.1",
+    "description": "Messanger send and get functions",
+    "dependencies": {
+        "request": "^2.88.0"
+    }
+}
