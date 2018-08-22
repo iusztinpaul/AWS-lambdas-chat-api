@@ -5,11 +5,13 @@ Chat back-end implemented with aws Lambdas and aws ElastiCache - Redis.
 # API
     /croom/iswriting -> POST, GET, DELETE (query params: user, listener)
     /croom/join -> POST, DELETE (query params: user, listener)
-    /croom/message -> POST (params: from, to, listener AND body: message), 
+    /croom/message -> POST (params: from, to, listener, is_photo AND body: message), 
                       GET(params: listener, user)
     /croom/message/page -> POST (params: from, to, listener, size AND body: [messages..]),
                            GET(params: user, listener, size)
     /user/inchat -> GET (params: user)
+
+### !!!!!!!!!!!!! There is photo support only on the /croom/message endpoint !!!!!!!!!!!!!!!!
 
 ## !!! Response has the following format !!!: 
 ```
@@ -27,7 +29,8 @@ Chat back-end implemented with aws Lambdas and aws ElastiCache - Redis.
 			from: from,
 			to: to,
 			message: message,
-			sent_timestamp: Date.now()
+			sent_timestamp: Date.now(),
+			is_photo: is_photo
     }
 ```
 

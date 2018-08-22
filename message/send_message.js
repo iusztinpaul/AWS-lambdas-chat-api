@@ -9,6 +9,7 @@ exports.handler = function(e, ctx, callback) {
 	let to = e.to;
 	let listener = e.listener;
 	let message = e.message;
+	let is_photo = e.is_photo
 
 	if(f.isAnyNullOrEmpty(from, to, listener, message)) {
 		callback(null, f.createResponse('', 
@@ -16,11 +17,15 @@ exports.handler = function(e, ctx, callback) {
 			'', 400));
 			rsmq.quit();
 	} else {
+		if(f.isNullOrEmpty(is_photo))
+			is_photo = false
+
 		let json_serialzed_message = JSON.stringify({
 			from: from,
 			to: to,
 			message: message,
-			sent_timestamp: Date.now()
+			sent_timestamp: Date.now(),
+			is_photo: is_photo
 		});
 
 		let cr_namespace = `${settings.CHAT_ROOM_NAMESPACE}-${listener}`; 
