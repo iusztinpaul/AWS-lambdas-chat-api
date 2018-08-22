@@ -9,6 +9,7 @@ Chat back-end implemented with aws Lambdas and aws ElastiCache - Redis.
                       GET(params: listener, user)
     /croom/message/page -> POST (params: from, to, listener, size AND body: [messages..]),
                            GET(params: user, listener, size)
+    /user/inchat -> GET (params: user)
 
 ## !!! Response has the following format !!!: 
 ```
@@ -17,6 +18,16 @@ Chat back-end implemented with aws Lambdas and aws ElastiCache - Redis.
         errorMessage: errorMessage,
         infoMessage: infoMessage,
         statusCode: statusCode
+    }
+```
+
+## !!! Message format !!!:
+```
+    {
+			from: from,
+			to: to,
+			message: message,
+			sent_timestamp: Date.now()
     }
 ```
 

@@ -4,19 +4,21 @@ const REDIS_OPTIONS = {
     ns: 'cr'
     }
 
-//namespaces
+// namespaces
 const CHAT_ROOM_NAMESPACE = 'cr'
 const IS_WRITING_NAMESPACE = 'wrt'
+const IN_CHAT_NAMESPACE = 'ic'
 
-//query string constants
+// query string constants
 const FROM = 'from'
 const TO = 'to'
 const LISTENER = 'listener'
 const USERS = 'users'
 
-//true and false strings
-const TRUE = 'true'
-const FALSE = 'false'
+// miscellaneous
+const TRUE = true
+const FALSE = false
+const MAX_MESSAGE_SIZE = -1 // In bytes. Allowed values: 1024-65536 and -1 (for unlimited size).
 
 module.exports = {
     REDIS_OPTIONS: REDIS_OPTIONS,
@@ -28,5 +30,5 @@ module.exports = {
     USERS: USERS,
     TRUE: TRUE,
     FALSE: FALSE,
-    MAX_MESSAGE_SIZE: -1 // In bytes. Allowed values: 1024-65536 and -1 (for unlimited size).
+    MAX_MESSAGE_SIZE: MAX_MESSAGE_SIZE
 }

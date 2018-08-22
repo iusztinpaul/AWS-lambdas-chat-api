@@ -1,6 +1,7 @@
 var RedisSMQ = require("rsmq");
 var settings = require('./common/settings')
 var f = require('./common/functions')
+var f_user_in_chat = require('./common/user_in_chat_common')
 
 exports.handler = function(e, ctx, callback) {
     
@@ -27,7 +28,9 @@ exports.handler = function(e, ctx, callback) {
                     if(err) {
                         callback(null, f.createResponse('', err.message, '', 500));
                     } else {
-                        callback(null, f.createResponse('', '', `Queue ${cr_queue_namespace} was created.`, 200));
+                        // This functions also handles the callbacks.
+                        f_user_in_chat.add_flag(callback, settings.TRUE, user, 
+                            `Queue ${cr_queue_namespace} was created.`);
                     }
                     rsmq.quit();
                 });
