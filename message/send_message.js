@@ -1,6 +1,6 @@
 var settings = require('common/settings')
 var RedisSMQ = require("rsmq");
-var f = require('./common/functions')
+var f = require('./common/functions');
 
 exports.handler = function(e, ctx, callback) {
 
@@ -19,8 +19,10 @@ exports.handler = function(e, ctx, callback) {
 		let json_serialzed_message = JSON.stringify({
 			from: from,
 			to: to,
-			message: message
+			message: message,
+			sent_timestamp: Date.now()
 		});
+
 		let cr_namespace = `${settings.CHAT_ROOM_NAMESPACE}-${listener}`; 
         let cr_queue_namespace = `${cr_namespace}-${to}`; // Per user chat queue.
         console.log(`Message queue namespace: ${cr_queue_namespace}`)
