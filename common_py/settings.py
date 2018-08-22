@@ -9,3 +9,5 @@ USER = 'user'
 KEY_DATA = 'data'
 KEY_MESSAGE = 'message'
 KEY_ERROR = 'errorMessage'
+
+MAX_PAGE_SIZE = 10

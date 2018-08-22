@@ -27,5 +27,6 @@ module.exports = {
     LISTENER: LISTENER,
     USERS: USERS,
     TRUE: TRUE,
-    FALSE: FALSE
+    FALSE: FALSE,
+    MAX_MESSAGE_SIZE: -1 // In bytes. Allowed values: 1024-65536 and -1 (for unlimited size).
 }

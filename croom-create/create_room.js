@@ -19,10 +19,19 @@ exports.handler = function(e, ctx, callback) {
         rsmq.createQueue( {qname: cr_queue_namespace}, function (err, resp) {
             if(err) {
                 callback(null, f.createResponse('', err.message, '', 500));
+                rsmq.quit();
             } else {
-                callback(null, f.createResponse('', '', `Queue ${cr_queue_namespace} was created.`, 200));
+                rsmq.setQueueAttributes( 
+                    {qname: cr_queue_namespace, maxsize: settings.MAX_MESSAGE_SIZE},
+                    function(err, cb){
+                    if(err) {
+                        callback(null, f.createResponse('', err.message, '', 500));
+                    } else {
+                        callback(null, f.createResponse('', '', `Queue ${cr_queue_namespace} was created.`, 200));
+                    }
+                    rsmq.quit();
+                });
             } 
-            rsmq.quit();
         });
     }
 }
