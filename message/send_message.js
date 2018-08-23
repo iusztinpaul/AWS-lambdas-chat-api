@@ -19,6 +19,10 @@ exports.handler = function(e, ctx, callback) {
 	} else {
 		if(f.isNullOrEmpty(is_photo))
 			is_photo = false
+		else if(typeof(is_photo) === 'string')
+			is_photo = is_photo.toLowerCase() === 'true'
+		else
+			is_photo = false
 
 		let json_serialzed_message = JSON.stringify({
 			from: from,
