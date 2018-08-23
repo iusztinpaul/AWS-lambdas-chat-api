@@ -3,13 +3,13 @@
 Chat back-end implemented with aws Lambdas and aws ElastiCache - Redis.
 
 # API
-    /croom/iswriting -> POST, GET, DELETE (query params: user, listener)
-    /croom/join -> POST, DELETE (query params: user, listener)
-    /croom/message -> POST (params: from, to, listener, is_photo AND body: message), 
-                      GET(params: listener, user)
-    /croom/message/page -> POST (params: from, to, listener, size AND body: [messages..]),
-                           GET(params: user, listener, size)
-    /user/inchat -> GET (params: user)
+    /croom/iswriting -> POST, GET, DELETE (query params: user=?, listener=?)
+    /croom/join -> POST, DELETE (query params: user=?, listener=?)
+    /croom/message -> POST (params: from=?, to=?, listener=?, is_photo=? AND body: message=?), 
+                      GET(params: listener=?, user=?)
+    /croom/message/page -> POST (params: from=?, to=?, listener=?, size=? AND body: messages=[...]),
+                           GET(params: user=?, listener=?, size=?)
+    /user/inchat -> GET (params: user=?)
 
 ### !!!!!!!!!!!!! There is photo support only on the /croom/message endpoint !!!!!!!!!!!!!!!!
 
