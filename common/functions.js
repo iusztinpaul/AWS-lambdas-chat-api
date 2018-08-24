@@ -1,10 +1,10 @@
 var createResponse = function(data='', errorMessage='', infoMessage='', statusCode=0) {
-    return JSON.stringify({
+    return {
         data: data,
         errorMessage: errorMessage,
         infoMessage: infoMessage,
         statusCode: statusCode
-    })
+    };
 }
 
 var isNullOrEmpty = function(text) {
