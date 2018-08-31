@@ -21,7 +21,7 @@ exports.handler = function(e, ctx, callback) {
                 callback(null, f.createResponse('', err.message, '', 500));
             } else {
                 // This functions also handles the callbacks.
-                f_user_in_chat.add_flag(callback, settings.TRUE, user, 
+                f_user_in_chat.add_flag(callback, settings.FALSE, user, 
                     `Queue ${cr_queue_namespace} was deleted.`);
             } 
             rsmq.quit();
