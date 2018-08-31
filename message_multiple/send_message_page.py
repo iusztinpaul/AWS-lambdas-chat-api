@@ -17,12 +17,10 @@ def lambda_handler(event, context):
     listener = event[s.LISTENER]
     messages = event[s.MESSAGES]
     page_size = event[s.PAGE_SIZE]
-
-    if page_size > s.MAX_PAGE_SIZE:
-        return f.create_response(400, f'Page size is too big. Max is {s.MAX_PAGE_SIZE}.')
+    print(f'Messages {messages}')
 
     if not isinstance(messages, list):
-        return f.create_response(400, 'Messages type is not a list')
+        return f.create_response(400, 'Messages are not a list')
 
     if len(messages) > page_size:
         return f.create_response(400, 'Sent more messages than the page size')
@@ -47,7 +45,6 @@ def lambda_handler(event, context):
         )
         
         data = response['Payload'].read().decode('utf-8')
-        data = json.loads(data)
         data = json.loads(data)
         print(data)
 
